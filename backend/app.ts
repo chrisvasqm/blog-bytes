@@ -3,10 +3,18 @@ import 'dotenv/config';
 import express from 'express';
 import 'express-async-errors';
 import helmet from 'helmet';
-import postsRouter from './routes/posts';
 import errorMiddleware from './middlewares/errorMiddleware';
+import postsRouter from './routes/posts';
 
 const app = express();
+
+process.on('uncaughtException', exception => {
+  console.error('Uncaught Exception: ', exception.stack);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error(`Unhandled Promise Rejection at: ${promise} | Reason: ${promise}`);
+});
 
 app.use(express.json({ limit: '5mb' }));
 app.use(cors());
