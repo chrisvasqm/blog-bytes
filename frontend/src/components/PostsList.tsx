@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
-import Post from '../models/Post';
-import axios, { AxiosError } from 'axios';
 import { CircularProgress, Stack } from '@mui/material';
+import axios, { AxiosError } from 'axios';
+import { useEffect, useState } from 'react';
+import { toast } from 'sonner';
+import Post from '../models/Post';
 
 function PostsList() {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -14,7 +15,7 @@ function PostsList() {
         const response = await axios.get('http://localhost:3000/api/posts');
         setPosts(response.data);
       } catch (error: unknown) {
-        if (error instanceof AxiosError) console.log(error.stack);
+        if (error instanceof AxiosError) toast(error.message)
       } finally {
         setLoading(false);
       }
