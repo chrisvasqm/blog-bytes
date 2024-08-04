@@ -1,8 +1,9 @@
-import { CircularProgress, Stack } from '@mui/material';
+import { CircularProgress, Grid, Stack } from '@mui/material';
 import axios, { AxiosError } from 'axios';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import Post from '../models/Post';
+import PostCard from './PostCard';
 
 function PostsList() {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -29,9 +30,11 @@ function PostsList() {
   </Stack>
 
   return (
-    <ul>
-      {posts.map(post => <li key={post.id}>{post.title}</li>)}
-    </ul>
+    <Stack gap={2} alignItems={'center'} minWidth={300}>
+      {posts.map(post => <Grid key={post.id} item>
+        <PostCard post={post} />
+      </Grid>)}
+    </Stack>
   )
 }
 
