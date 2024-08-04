@@ -1,10 +1,12 @@
 import './App.css'
+import Navbar from './components/Navbar'
+import { Box } from '@mui/material';
 
 function App() {
   return (
-    <>
-      <h1>Blog Bytes</h1>
-    </>
+    <Box>
+      <Navbar />
+    </Box>
   )
 }
 
