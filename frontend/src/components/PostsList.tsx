@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Post from '../models/Post';
 import axios, { AxiosError } from 'axios';
+import { CircularProgress, Stack } from '@mui/material';
 
 function PostsList() {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -22,7 +23,9 @@ function PostsList() {
     fetchPosts();
   }, []);
 
-  if (isLoading) return <p>Loading...</p>
+  if (isLoading) return <Stack justifyContent={'center'} alignItems={'center'} height={'90vh'}>
+    <CircularProgress />
+  </Stack>
 
   return (
     <ul>
