@@ -1,6 +1,6 @@
 import { AppBar, Container, Typography } from '@mui/material';
 
-const Navbar = () => {
+function Navbar() {
   return (
     <AppBar position='static' sx={{ padding: 2 }}>
       <Container>
