@@ -1,28 +1,15 @@
-import AddIcon from '@mui/icons-material/Add';
-import { Box, Container, Fab } from '@mui/material';
+import { Box } from '@mui/material';
 import { Toaster } from 'sonner';
 import './App.css';
 import Navbar from './components/Navbar';
-import PostsList from './components/PostsList';
+import PostView from './components/PostView';
 
 function App() {
   return (
     <Box>
       <Navbar />
       <main>
-        <Container>
-          <PostsList />
-        </Container>
-        <Fab
-          color="primary"
-          aria-label="add"
-          sx={{
-            position: 'absolute',
-            bottom: 16,
-            right: 16
-          }}>
-          <AddIcon />
-        </Fab>
+        <PostView />
       </main>
       <Toaster />
     </Box>

@@ -1,4 +1,5 @@
-import { CircularProgress, Grid, Stack } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import { CircularProgress, Fab, Grid, Stack } from '@mui/material';
 import axios, { AxiosError } from 'axios';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
@@ -30,11 +31,24 @@ function PostsList() {
   </Stack>
 
   return (
-    <Stack gap={2} alignItems={'center'} minWidth={300}>
-      {posts.map(post => <Grid key={post.id} item>
-        <PostCard post={post} />
-      </Grid>)}
-    </Stack>
+    <>
+      <Stack gap={2} alignItems={'center'} minWidth={300}>
+        {posts.map(post => <Grid key={post.id} item>
+          <PostCard post={post} />
+        </Grid>)}
+      </Stack>
+      
+      <Fab
+        color="primary"
+        aria-label="add"
+        sx={{
+          position: 'absolute',
+          bottom: 16,
+          right: 16
+        }}>
+        <AddIcon />
+      </Fab>
+    </>
   )
 }
 
