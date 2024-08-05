@@ -10,7 +10,7 @@ const PostCard = ({ post }: Props) => {
     <Card sx={{
       paddingX: 3,
       paddingY: 2,
-      maxWidth: 400,
+      width: 500,
       minWidth: 300,
       boxShadow: 4
     }}>
