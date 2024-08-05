@@ -59,23 +59,25 @@ function PostsList() {
 
   return (
     <>
-      <Stack gap={2} alignItems={'center'} minWidth={300} paddingBottom={2}>
+      <Stack gap={2} alignItems={'center'} minWidth={300} paddingBottom={2} position="relative">
         {posts.map(post => <Grid key={post.id} item>
           <PostCard post={post} />
         </Grid>)}
-      </Stack>
 
-      <Fab
-        color="primary"
-        aria-label="add"
-        onClick={handleOpen}
-        sx={{
-          position: 'absolute',
-          bottom: 16,
-          right: 16
-        }}>
-        <AddIcon />
-      </Fab>
+        <Fab
+          color="primary"
+          aria-label="add"
+          onClick={handleOpen}
+          sx={{
+            position: 'sticky',
+            bottom: 16,
+            right: 16,
+            alignSelf: 'flex-end',
+            marginRight: 2,
+          }}>
+          <AddIcon />
+        </Fab>
+      </Stack>
 
       <Dialog
         open={open}
