@@ -15,7 +15,7 @@ const PostCard = ({ post }: Props) => {
       boxShadow: 4
     }}>
       <Typography fontSize={24} marginBottom={2}>{post.title}</Typography>
-      <Typography>{post.content}</Typography>
+      <Typography sx={{whiteSpace: 'wrap', wordBreak: 'break-all'}}>{post.content}</Typography>
     </Card>
   )
 }
