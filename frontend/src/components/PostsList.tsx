@@ -98,6 +98,8 @@ function PostsList() {
           <TextField
             required
             fullWidth
+            multiline
+            rows={5}
             margin="dense"
             id="content"
             name="content"
