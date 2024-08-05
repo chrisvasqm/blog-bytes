@@ -1,5 +1,5 @@
 import AddIcon from '@mui/icons-material/Add';
-import { CircularProgress, Fab, Grid, Stack } from '@mui/material';
+import { Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogTitle, Fab, Grid, Stack, TextField } from '@mui/material';
 import axios, { AxiosError } from 'axios';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
@@ -9,6 +9,9 @@ import PostCard from './PostCard';
 function PostsList() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [isLoading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
 
   useEffect(() => {
     setLoading(true);
@@ -26,6 +29,28 @@ function PostsList() {
     fetchPosts();
   }, []);
 
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  }
+
+  const handleSavePost = async () => {
+    setLoading(true);
+    try {
+      const data = { title, content };
+      const response = await axios.post('http://localhost:3000/api/posts', data);
+      setPosts([response.data, ...posts]);
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) toast(error.message)
+    } finally {
+      setLoading(false);
+      handleClose();
+    }
+  }
+
   if (isLoading) return <Stack justifyContent={'center'} alignItems={'center'} height={'90vh'}>
     <CircularProgress />
   </Stack>
@@ -37,10 +62,11 @@ function PostsList() {
           <PostCard post={post} />
         </Grid>)}
       </Stack>
-      
+
       <Fab
         color="primary"
         aria-label="add"
+        onClick={handleOpen}
         sx={{
           position: 'absolute',
           bottom: 16,
@@ -48,6 +74,45 @@ function PostsList() {
         }}>
         <AddIcon />
       </Fab>
+
+      <Dialog
+        open={open}
+        onClose={handleClose}
+      >
+        <DialogTitle>Add post</DialogTitle>
+        <DialogContent>
+          <TextField
+            autoFocus
+            required
+            fullWidth
+            margin="dense"
+            id="title"
+            name="title"
+            label="Title"
+            type="text"
+            variant="outlined"
+            value={title}
+            onChange={event => setTitle(event.target.value)}
+          />
+
+          <TextField
+            required
+            fullWidth
+            margin="dense"
+            id="content"
+            name="content"
+            label="Content"
+            type="text"
+            variant="outlined"
+            value={content}
+            onChange={event => setContent(event.target.value)}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleSavePost}>Save</Button>
+        </DialogActions>
+      </Dialog>
     </>
   )
 }
