@@ -16,7 +16,11 @@ const PostCard = ({ post }: Props) => {
       border: 'solid 1px #ccc'
     }}>
       <Typography fontSize={24} marginBottom={2}>{post.title}</Typography>
-      <Typography color={'#616161'} sx={{whiteSpace: 'wrap', wordBreak: 'break-all'}}>{post.content}</Typography>
+
+      <Typography color={'#616161'} sx={{ whiteSpace: 'wrap', wordBreak: 'break-all' }}>
+        <div dangerouslySetInnerHTML={{ __html: post.content }}></div>
+      </Typography>
+
     </Box>
   )
 }

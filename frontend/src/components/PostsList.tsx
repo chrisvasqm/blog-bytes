@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import Post from '../models/Post';
 import PostCard from './PostCard';
+import RichEditor from './RichEditor';
 
 function PostsList() {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -95,24 +96,12 @@ function PostsList() {
             label="Title"
             type="text"
             variant="outlined"
+            sx={{marginBottom: 2}}
             value={title}
             onChange={event => setTitle(event.target.value)}
           />
 
-          <TextField
-            required
-            fullWidth
-            multiline
-            rows={5}
-            margin="dense"
-            id="content"
-            name="content"
-            label="Content"
-            type="text"
-            variant="outlined"
-            value={content}
-            onChange={event => setContent(event.target.value)}
-          />
+          <RichEditor value={content} onChange={newValue => setContent(newValue)} />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
