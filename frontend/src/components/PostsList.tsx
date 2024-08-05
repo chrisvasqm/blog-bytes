@@ -43,6 +43,8 @@ function PostsList() {
       const data = { title, content };
       const response = await axios.post('http://localhost:3000/api/posts', data);
       setPosts([response.data, ...posts]);
+      setTitle('');
+      setContent('');
     } catch (error: unknown) {
       if (error instanceof AxiosError) toast(error.message)
     } finally {
@@ -57,7 +59,7 @@ function PostsList() {
 
   return (
     <>
-      <Stack gap={2} alignItems={'center'} minWidth={300}>
+      <Stack gap={2} alignItems={'center'} minWidth={300} paddingBottom={2}>
         {posts.map(post => <Grid key={post.id} item>
           <PostCard post={post} />
         </Grid>)}
@@ -79,7 +81,7 @@ function PostsList() {
         open={open}
         onClose={handleClose}
       >
-        <DialogTitle>Add post</DialogTitle>
+        <DialogTitle>What's on your mind?</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
@@ -112,7 +114,7 @@ function PostsList() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleSavePost}>Save</Button>
+          <Button onClick={handleSavePost}>Post</Button>
         </DialogActions>
       </Dialog>
     </>
